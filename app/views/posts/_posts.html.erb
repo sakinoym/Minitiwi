@@ -1,0 +1,22 @@
+<% if posts.any? %>
+  <ul class="list-unstyled mt-2">
+    <% posts.each do |post| %>
+      <li class="d-flex">
+        <img class="rouded me-2 me-5" src="<% gravatar_url(post.user, { size: 64 }) %>" alt="">
+        <div>
+          <div>
+            <%= link_to post.user.name, user_path(post.user), class: "text-decoration-none" %> <span class="text-muted">posted at <%= post.created_at %></span>
+          </div>
+          <div>
+            <p><%= post.content %></p>
+          </div>
+          <div>
+            <% if current_user == post.user %>
+              <%= button_to "Delete", post, method: :delete, data: { turbo_confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+            <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%== pagy_bootstrap_nav(@pagy) %>
+<% end %>
