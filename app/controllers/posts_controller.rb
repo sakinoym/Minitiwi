@@ -8,7 +8,7 @@ class PostsController < ApplicationController
       flash[:success] = 'メッセージを投稿しました'
       redirect_to root_url
     else
-      @pagy, @posts = pagy(current_user.posts.order(id: :desc))
+      @pagy, @posts = pagy(current_user.feed_posts.order(id: :desc))
       flash.now[:danger] = 'メッセージの投稿に失敗しました'
       render 'toppages/index', status: :unprocessable_entity
     end
