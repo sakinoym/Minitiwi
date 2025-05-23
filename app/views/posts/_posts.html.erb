@@ -14,6 +14,18 @@
             <% if current_user == post.user %>
               <%= button_to "Delete", post, method: :delete, data: { turbo_confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
             <% end %>
+            <% if current_user.liking?(post) %>
+              <%= form_with(model: current_user.favorites.find_by(post_id: post.id), method: :delete) do |f| %>
+                <%= hidden_field_tag :post_id, post.id %>
+                <%= f.submit 'Unfavorite', class: 'btn btn-secondary btn-sm' %>
+              <% end %>
+            <% else %>
+              <%= form_with(model: current_user.favorites.build) do |f| %>
+                <%= hidden_field_tag :post_id, post.id %>
+                <%= f.submit 'Favorite', class: 'btn btn-success btn-sm' %>
+              <% end %>
+            <% end %>
+            </div>
         </div>
       </li>
     <% end %>
