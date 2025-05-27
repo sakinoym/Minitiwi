@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
 
-  validates :content, presence: true, length: { maximum: 255 }
+  MAX_CONTENT_LENGTH = 255
+  validates :content, presence: true, length: { maximum: MAX_CONTENT_LENGTH }
 
   has_many :favorites, dependent: :destroy
-  has_many :favoriters, through: :favorites, source: :user
 end
