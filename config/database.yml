@@ -50,7 +50,14 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: minitwi_production
-  username: minitwi
-  password: <%= ENV["MINITWI_DATABASE_PASSWORD"] %>
+  # database: minitwi_production
+  # username: minitwi
+  # password: <%= ENV["MINITWI_DATABASE_PASSWORD"] %>
+
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  host: aws-0-ap-northeast-1.pooler.supabase.com
+  database: postgres
+  username: postgres.joqiwjhwonkfonhvswwj
+  password: <%= ENV['SUPABASE_DATABASE_PASSWORD'] %>

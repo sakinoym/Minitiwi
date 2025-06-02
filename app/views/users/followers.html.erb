@@ -1,21 +1,20 @@
-<div class="row">
-  <aside class="col-sm-4">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><%= @user.name %></h3>
+<div class="row justify-content-center">
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-2 ms-3">
+        <a href="<%= user_path(@user) %>" class="link-body-emphasis"><h3><i class="bi bi-chevron-left"></i></h3></a>
       </div>
-      <div class="card-body">
-        <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+      <div class="col-8 text-center">
+      <h3><%= @user.name %></h3>
       </div>
     </div>
-    <%= render 'relationships/follow_button', user: @user %>
-  </aside>
+  </div>
+</div>
+<div class="row justify-content-center mt-4">
   <div class="col-sm-8">
     <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">Posts  <span class="badge bg-secondary"><%= @count_posts %></span></a></li>
       <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">Followings  <span class="badge bg-secondary"><%= @count_followings %></span></a></li>
       <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">Followers  <span class="badge bg-secondary"><%= @count_followers %></span></a></li>
-      <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>">Likes <span class="badge bg-secondary"><%= @count_likes %></span></a></li>
     </ul>
     <%= render 'users', users: @followers %>
   </div>
