@@ -22,6 +22,6 @@
       <li class="nav-item"><a href="<%= privates_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(privates_user_path(@user)) %>">Privates <span class="badge bg-secondary"><%= @count_privates %></a></li>
       <% end %>
       </ul>
-    <%= render 'posts/posts', posts: @likes %>
+    <%= render 'posts/posts', posts: @privates %>
   </div>
 </div>

@@ -18,6 +18,9 @@
     <ul class="nav nav-tabs nav-justified mb-3">
       <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">Posts  <span class="badge bg-secondary"><%= @count_posts %></span></a></li>
       <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>">Likes <span class="badge bg-secondary"><%= @count_likes %></span></a></li>
+      <% if current_user == @user %>
+      <li class="nav-item"><a href="<%= privates_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(privates_user_path(@user)) %>">Privates <span class="badge bg-secondary"><%= @count_privates %></a></li>
+      <% end %>
     </ul>
     <%= render 'posts/posts', posts: @posts %>
   </div>

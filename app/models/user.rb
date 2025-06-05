@@ -30,7 +30,7 @@ class User < ApplicationRecord
   end
 
   def feed_posts
-    Post.where(user_id: self.following_ids + [self.id])
+    Post.where(user_id: self.following_ids + [self.id], flag: 2)
   end
 
   def like(any_post)

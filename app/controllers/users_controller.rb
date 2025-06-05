@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :likes]
-  before_action :set_user_and_counts, only: [:show, :followings, :followers, :likes]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :likes, :privates]
+  before_action :set_user_and_counts, only: [:show, :followings, :followers, :likes, :privates]
 
   def index
     @pagy, @users = pagy(User.order(id: :desc))
   end
 
   def show
-    @pagy, @posts = pagy(@user.posts.order(id: :desc))
+    @pagy, @posts = pagy(@user.posts.where(flag: 2).order(id: :desc))
   end
 
   def new
@@ -35,7 +35,11 @@ class UsersController < ApplicationController
   end
 
   def likes
-    @pagy, @likes = pagy(@user.likes)
+    @pagy, @likes = pagy(@user.likes.where(flag: 2).order(id: :desc))
+  end
+
+  def privates
+    @pagy, @privates = pagy(@user.posts.where(flag: 1).order(id: :desc))
   end
 
   private
