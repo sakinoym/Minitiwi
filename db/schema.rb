@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_03_024646) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_06_061543) do
   create_table "favorites", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
@@ -28,6 +28,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_03_024646) do
     t.datetime "updated_at", null: false
     t.integer "flag"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "prohibited_words", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "word"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

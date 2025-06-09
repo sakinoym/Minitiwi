@@ -1,3 +1,5 @@
+require 'nkf'
+
 class User < ApplicationRecord
   before_save { self.email.downcase! }
   validates :name, presence: true, length: { maximum: 50 }
@@ -5,6 +7,8 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                     uniqueness: { case_sensitive: false }
   has_secure_password
+
+  validate :does_not_include_prohibited_words
 
   has_many :posts
   has_many :relationships
@@ -44,5 +48,18 @@ class User < ApplicationRecord
 
   def liking?(any_post)
     self.likes.include?(any_post)
+  end
+
+  private
+
+  def does_not_include_prohibited_words
+    normalized_name = NKF.nkf('-w --hiragana', name)
+    prohibited_words = ProhibitedWord.pluck(:word)
+    prohibited_words.each do |ng_word|
+      if normalized_name.include?(ng_word)
+        errors.add(:name, "に禁止ワードが含まれているため登録できません")
+        break
+      end
+    end
   end
 end

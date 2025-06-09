@@ -40,3 +40,6 @@
 /node_modules
 
 /config/master.key
+
+#禁止ワード一覧
+db/fixtures/prohibited_words.csv
