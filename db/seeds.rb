@@ -8,9 +8,21 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# (1..30).each do |number|
-#   Post.create(content:'テスト' + number.to_s, user_id:1)
-# end
+(1..10).each do |number|
+  Post.create(content:'テスト' + number.to_s, user_id:1, flag:2)
+end
+
+(1..10).each do |number|
+  Post.create(content:'テスト' + number.to_s, user_id:2, flag:2)
+end
+
+(1..10).each do |number|
+  Post.create(content:'テスト' + number.to_s, user_id:3, flag:2)
+end
+
+(2..10).each do |number|
+  User.create(name: 'テスト' + number.to_s, email: 'test' + number.to_s + '@mail.com', password: 'password')
+end
 
 require 'csv'
 
