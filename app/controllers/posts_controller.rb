@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content, :flag)
+    params.require(:post).permit(:content, :flag, :image)
   end
 
   def update_flag_params

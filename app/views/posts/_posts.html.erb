@@ -2,13 +2,18 @@
   <ul class="list-unstyled mt-2">
     <% posts.each do |post| %>
       <li class="d-flex">
-        <img class="rounded me-2 mb-5" src="<%= gravatar_url(post.user, { size: 64 }) %>" alt="">
+        <img class="rounded me-2 mb-5 d-block" style = "width: 64px; height: 64px" src="<%= gravatar_url( post.user ) %>" alt="">
         <div>
           <div>
             <%= link_to post.user.name, user_path(post.user), class: "text-decoration-none" %> <span class="text-muted">posted at <%= post.created_at %></span>
           </div>
           <div>
             <p><%= post.content %></p>
+          </div>
+          <div>
+            <% if post.image.attached? %>
+              <%= image_tag post.image %>
+            <% end %>
           </div>
           <div class="row align-items-center">
             <div class="col-auto p-0">

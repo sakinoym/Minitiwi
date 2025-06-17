@@ -1,10 +1,11 @@
 <% if logged_in? %>
   <div class="row">
     <aside class="col-sm-4">
-      <%= form_with(model: @post) do |f| %>
+      <%= form_with(model: @post, html: { multipart: true }) do |f| %>
         <div class="mb-3">
           <%= render 'layouts/error_messages', model: f.object %>
           <%= f.text_area :content, class: 'form-control', rows: 5 %>
+          <%= f.file_field :image, class: 'form-control form-control-sm' %>
         </div>
         <%= f.hidden_field :flag, value: 2 %>
         <%= f.submit 'Post', class: 'btn btn-primary w-100' %>
